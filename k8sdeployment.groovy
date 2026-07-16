@@ -1,5 +1,14 @@
 pipeline {
-    agent any
+    agent    {
+        
+        label 'node-new'
+    }
+
+        tools {
+        nodejs 'NodeJS'
+    }
+
+
 
     environment {
         DOCKER_REPO = "saritaRyadav"
