@@ -1,18 +1,18 @@
 pipeline{
     agent any
     environment {
-        DOCKER_REPO = "mayurwagh"
+        DOCKER_REPO = "saritaRyadav"
         DOCKER_USER = "node-app"
         IMAGE_NAME = "node-app"
         CONTAINER_NAME = "node-container"
-        CLUSTER_NAME = "demo-mayurekscluster1"
-        REGION = "eu-north-1"
+        CLUSTER_NAME = "demo-saritaekscluster"
+        REGION = "ap-south-1"
     }
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/mayurmwagh/node-app.git'
+                    url: 'https://github.com/saritaRyadav/jenkins.git'
             }
         }
         stage('Verify Environment') {
@@ -50,7 +50,7 @@ pipeline{
             steps{
                withCredentials([
                         usernamePassword(
-                            credentialsId: 'docker-hub-creds',
+                            credentialsId: 'new-docker-cred',
                             usernameVariable: 'DOCKER_USERNAME',
                             passwordVariable: 'DOCKER_PASSWORD'
                         )
@@ -64,7 +64,7 @@ pipeline{
             steps{
                withCredentials([
                         usernamePassword(
-                            credentialsId: 'docker-hub-creds',
+                            credentialsId: 'new-docker-cred',
                             usernameVariable: 'DOCKER_USERNAME',
                             passwordVariable: 'DOCKER_PASSWORD'
                         )
@@ -83,7 +83,7 @@ pipeline{
                 steps {
           
                     sh '''
-                     sed -i "s|mayurwagh/node-app:latest|${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER}|g" k8s/deployment.yaml
+                     sed -i "s|saritaRyadav/node-app:latest|${DOCKER_REPO}/${DOCKER_USER}:${BUILD_NUMBER}|g" k8s/deployment.yaml
                     '''
                     sh 'cat k8s/deployment.yaml'
                 }
