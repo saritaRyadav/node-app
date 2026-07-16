@@ -4,11 +4,9 @@ pipeline {
         label 'node-new'
     }
 
-        tools {
+    tools {
         nodejs 'NodeJS'
     }
-
-
 
     environment {
         DOCKER_REPO = "saritaRyadav"
