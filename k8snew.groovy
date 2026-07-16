@@ -17,21 +17,22 @@ pipeline {
                     url: 'https://github.com/saritaRyadav/jenkins.git'
             }
         }
+        
+     stage('Debug') {
+        steps {
+        sh '''
+        whoami
+        pwd
+        echo $PATH
 
-        stage('Verify Environment') {
-            steps {
-                sh '''
-                    echo "Node Version:"
-                    node -v
+        which node || true
+        which npm || true
 
-                    echo "NPM Version:"
-                    npm -v
-
-                    echo "Docker Version:"
-                    docker --version
-                '''
-            }
-        }
+        node -v || true
+        npm -v || true
+        '''
+    }
+}
 
         stage('Install Dependencies') {
             steps {
