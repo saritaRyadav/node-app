@@ -18,21 +18,7 @@ pipeline {
             }
         }
         
-     stage('Debug') {
-        steps {
-        sh '''
-        whoami
-        pwd
-        echo $PATH
-
-        which node || true
-        which npm || true
-
-        node -v || true
-        npm -v || true
-        '''
-    }
-}
+     
 
         stage('Install Dependencies') {
             steps {
